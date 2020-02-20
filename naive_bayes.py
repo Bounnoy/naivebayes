@@ -7,7 +7,7 @@
 # This program was built in Python 3.
 
 from pathlib import Path
-from math import e
+import math
 import numpy as np
 import csv
 import pickle
@@ -37,7 +37,9 @@ class NaiveBayes:
                 a = 0 if (i - 1 < 0) else np.sum(cnum[:i-1])
                 b = a + cnum[i]
                 mean = np.sum(self.trainData[a:b,x]) / cnum[i]
-                print('%.2f' % mean)
+                std = math.sqrt(np.sum( (self.trainData[a:b,x] - mean)**2 ) / cnum[i])
+                std = 0.01 if (std == 0) else std
+                print("Class", '%d'%classes[i] + ", mean =", '%.2f' % mean + ", std =", '%.2f' % std)
 
 if __name__ == '__main__':
 
