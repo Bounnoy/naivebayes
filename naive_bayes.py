@@ -16,8 +16,10 @@ import sys
 
 class NaiveBayes:
     def __init__(self, train, test):
-        self.trainData = train
+        self.trainData = train[train[:,(len(train[0])-1)].argsort()]
         self.testData = test
+
+        print(self.trainData)
 
 if __name__ == '__main__':
 
@@ -61,3 +63,5 @@ if __name__ == '__main__':
     print(train)
     print("# of training rows/cols:", len(train), len(train[0]))
     print("# of test rows/cols:", len(test), len(test[0]))
+
+    nb = NaiveBayes(train, test)
