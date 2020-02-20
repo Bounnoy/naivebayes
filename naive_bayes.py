@@ -21,6 +21,24 @@ class NaiveBayes:
 
         print(self.trainData)
 
+    def train(self):
+        (classes, cnum) = np.unique(self.trainData[:,(len(train[0])-1)], return_counts=True)
+        attribs = len(self.trainData[0])-1
+        print(classes)
+        print(cnum)
+        print(attribs)
+
+        # accuracy = np.zeros(len(classes)*attribs)         # Training accuracy.
+        # accuracyTest = np.zeros(iterations)     # Test accuracy.
+
+        for i in range(len(classes)):
+
+            for x in range(attribs):
+                a = 0 if (i - 1 < 0) else np.sum(cnum[:i-1])
+                b = a + cnum[i]
+                mean = np.sum(self.trainData[a:b,x]) / cnum[i]
+                print('%.2f' % mean)
+
 if __name__ == '__main__':
 
     if len(sys.argv) != 3:
@@ -65,3 +83,4 @@ if __name__ == '__main__':
     print("# of test rows/cols:", len(test), len(test[0]))
 
     nb = NaiveBayes(train, test)
+    nb.train()
