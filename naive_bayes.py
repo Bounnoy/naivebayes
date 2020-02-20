@@ -39,21 +39,25 @@ if __name__ == '__main__':
         sys.exit(testName + ".txt not found")
 
     if not pklTrain.exists():
-        f1 = np.genfromtxt(trainName + ".txt", delimiter=",")
+        f1 = np.genfromtxt(trainName + ".txt")
         csv1 = open(trainName + ".pkl", 'wb')
         pickle.dump(f1, csv1)
         csv1.close()
 
     if not pklTest.exists():
-        f2 = np.genfromtxt(testName + ".txt", delimiter=",")
+        f2 = np.genfromtxt(testName + ".txt")
         csv2 = open(testName + ".pkl", 'wb')
         pickle.dump(f2, csv2)
         csv2.close()
 
     file1 = open(trainName + ".pkl", "rb")
-    train1 = pickle.load(file1)
+    train = pickle.load(file1)
     file1.close()
 
     file2 = open(testName + ".pkl", "rb")
-    test2 = pickle.load(file2)
+    test = pickle.load(file2)
     file2.close()
+
+    print(train)
+    print("# of training rows/cols:", len(train), len(train[0]))
+    print("# of test rows/cols:", len(test), len(test[0]))
