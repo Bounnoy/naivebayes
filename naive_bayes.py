@@ -41,22 +41,21 @@ class NaiveBayes:
 
                 x = (row[j] - mean) / std                                   # Subcalculation for exponent.
                 calc = math.exp(-x*x/2.0) / (math.sqrt(2.0*math.pi) * std)  # Calculate full gaussian.
-                gaus += math.log(calc) if calc != 0 else 0.0                # Log results to prevent underflow.
+                gaus += math.log(calc) if calc > 0 else 0.0                # Log results to prevent underflow.
 
             gaus += math.log(pc[i]) # Add probability(class).
             gaus = math.exp(gaus)   # Raise the results back so they're non-negative.
             tgaus += gaus           # Add to our total gaussian counter.
 
             # Check if new gaussian is about the same as the highest predicted gaussian.
-            if math.isclose(prob, gaus, abs_tol=0.0001):
+            if math.isclose(prob, gaus):
                 ties += 1
                 pred = random.choice([pred, list[i][0][2]]) # Randomly pick a prediction between the ties.
             else:
                 prob = max(prob, gaus)
-
                 # If the new gaussian is highest, make it the new predicted class.
                 # Else, keep old prediction.
-                pred = list[i][0][2] if math.isclose(prob, gaus, abs_tol=0.0001) else pred
+                pred = list[i][0][2] if math.isclose(prob, gaus) else pred
 
             if target == pred:
                 correct = 1

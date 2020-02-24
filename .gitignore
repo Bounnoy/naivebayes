@@ -1,3 +1,11 @@
+pendigits_training.txt
+pendigits_training.pkl
+pendigits_test.txt
+pendigits_test.pkl
+satellite_training.txt
+satellite_training.pkl
+satellite_test.txt
+satellite_test.pkl
 yeast_training.txt
 yeast_training.pkl
 yeast_test.txt
